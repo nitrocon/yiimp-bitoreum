@@ -143,7 +143,7 @@ YAAMP_ALGO g_algos[] =
 	{"geek", geek_hash, 1, 0, 0},
 	{"gr", gr_hash, 0x10000, 0, 0},
 	{"groestl", groestl_hash, 0x100, 0, sha256_hash_hex }, /* groestlcoin */
-	{"heavyhash", heavyhash_hash, 1, 0, 0}, /* OBTC */
+	{"heavyhash", heavyhash_hash, 1, 0, 0},
 	{"hex", hex_hash, 0x100, 0, sha256_hash_hex },
 	{"hive", hive_hash, 0x10000, 0, 0},
 	{"hmq1725", hmq17_hash, 0x10000, 0, 0},
