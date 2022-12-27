@@ -54,7 +54,7 @@ function BackendStatsUpdate()
 		));
 
 		if (bitcoinvaluetoa($stats->earnings) != $earnings) {
-			debuglog("$algo earnings: $earnings BTC");
+			debuglog("$algo earnings: $earnings BTRM");
 			$stats->earnings = $earnings;
 		}
 
@@ -122,10 +122,10 @@ function BackendStatsUpdate()
 					$coin = getdbo('db_coins', $item['coinid']);
 					if(!$coin) continue;
 
-					$btcghd = yaamp_profitability($coin);
+					$btrmghd = yaamp_profitability($coin);
 
-					$price += $btcghd * $item['d'] / $total_diff;
-					$rent += $btcghd * $item['d'] / $total_diff;
+					$price += $btrmghd * $item['d'] / $total_diff;
+					$rent += $btrmghd * $item['d'] / $total_diff;
 				}
 			}
 
@@ -153,8 +153,8 @@ function BackendStatsUpdate()
 			$coin = getdbosql('db_coins', "enable and auto_ready and algo=:algo order by index_avg desc", array(':algo'=>$algo));
 			if($coin)
 			{
-				$btcghd = yaamp_profitability($coin);
-				$stats->price = $btcghd;
+				$btrmghd = yaamp_profitability($coin);
+				$stats->price = $btrmghd;
 				$stats->rent = $stats->price + $stats->price * YAAMP_FEES_RENTING / 100;
 			}
 		}
@@ -175,11 +175,11 @@ function BackendStatsUpdate()
 	$step = 15;
 	$tm = floor(time()/$step/60)*$step*60;
 
-	$btc = getdbosql('db_coins', "symbol='BTC'");
-	if (!$btc) $btc = json_decode('{"id": 6, "balance": 0}');
+	$btrm = getdbosql('db_coins', "symbol='BTRM'");
+	if (!$btrm) $btrm = json_decode('{"id": 6, "balance": 0}');
 
-	$topay = dboscalar("select sum(balance) from accounts where coinid=$btc->id");	//here: take other currencies too
-	$margin = $btc->balance - $topay;
+	$topay = dboscalar("select sum(balance) from accounts where coinid=$btrm->id");	//here: take other currencies too
+	$margin = $btrm->balance - $topay;
 
 	$balances = dboscalar("select sum(balance) from balances");
 	$onsell = dboscalar("select sum(amount*bid) from orders");
@@ -187,7 +187,7 @@ function BackendStatsUpdate()
 	$immature = dboscalar("select sum(amount*price) from earnings where status=0");
 	$confirmed = dboscalar("select sum(amount*price) from earnings where status=1");
 
-	$wallets = dboscalar("select sum(balance*price) from coins where enable and symbol!='BTC'");
+	$wallets = dboscalar("select sum(balance*price) from coins where enable and symbol!='BTRM'");
 	$renters = dboscalar("select sum(balance) from renters");
 
 	$mints = dboscalar("select sum(mint*price) from coins where enable");
@@ -195,7 +195,7 @@ function BackendStatsUpdate()
 
 //	debuglog("mint $mints $immature $off");
 
-	$total_profit = $btc->balance + $balances + $onsell + $wallets - $topay - $renters;
+	$total_profit = $btrm->balance + $balances + $onsell + $wallets - $topay - $renters;
 
 	$stats = getdbosql('db_stats', "time=$tm");
 	if(!$stats)
@@ -205,7 +205,7 @@ function BackendStatsUpdate()
 	}
 
 	$stats->profit = $total_profit;
-	$stats->wallet = $btc->balance;
+	$stats->wallet = $btrm->balance;
 	$stats->wallets = $wallets;
 
 	$stats->margin = $margin;
@@ -335,7 +335,7 @@ function BackendStatsUpdate2()
 		}
 
 // 		$refcoin = getdbo('db_coins', $user->coinid);
-// 		if(!$refcoin) $refcoin = getdbosql('db_coins', "symbol='BTC'");
+// 		if(!$refcoin) $refcoin = getdbosql('db_coins', "symbol='BTRM'");
 // 		if(!$refcoin->price || !$refcoin->price2) continue;
 
 // 		$pending1 = dboscalar("select sum(amount*price) from earnings where coinid=$refcoin->id and status!=2 and userid=$user->id");

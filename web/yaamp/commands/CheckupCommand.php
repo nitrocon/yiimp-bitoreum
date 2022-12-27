@@ -45,7 +45,7 @@ class CheckupCommand extends CConsoleCommand
 			self::autolinkCoinsImages();
 
 			if (!YAAMP_ALLOW_EXCHANGE)
-				self::cleanUserBalancesBTC();
+				self::cleanUserBalancesBTRM();
 
 			echo "ok\n";
 			return 0;
@@ -215,9 +215,9 @@ class CheckupCommand extends CConsoleCommand
 	}
 
 	/**
-	 * Drop BTC user balances if YAAMP_ALLOW_EXCHANGE is false
+	 * Drop BTRM user balances if YAAMP_ALLOW_EXCHANGE is false
 	 */
-	public function cleanUserBalancesBTC()
+	public function cleanUserBalancesBTRM()
 	{
 		$modelsPath = $this->basePath.'/yaamp/models';
 		if(!is_dir($modelsPath))

@@ -414,7 +414,7 @@ function BackendBlockFind2($coinid = NULL)
 	$coins = getdbolist('db_coins', $sqlFilter);
 	foreach($coins as $coin)
 	{
-		if($coin->symbol == 'BTC') continue;
+		if($coin->symbol == 'BTRM') continue;
 		$remote = new WalletRPC($coin);
 
 		$timerpc = microtime(true);
@@ -542,11 +542,11 @@ function BackendUpdatePoolBalances($coinid = NULL)
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-function MonitorBTC()
+function MonitorBTRM()
 {
 //	debuglog(__FUNCTION__);
 
-	$coin = getdbosql('db_coins', "symbol='BTC'");
+	$coin = getdbosql('db_coins', "symbol='BTRM'");
 	if(!$coin) return;
 
 	$remote = new WalletRPC($coin);

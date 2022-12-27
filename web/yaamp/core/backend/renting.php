@@ -24,7 +24,7 @@ function BackendRentingUpdate()
 		$rent = dboscalar("select rent from hashrate where algo=:algo order by time desc limit 1", array(':algo'=>$submit->algo));
 		$amount = $rent * $submit->difficulty / 20116.56761169;
 
-		$factor = yaamp_algo_mBTC_factor($submit->algo); // 1000 for sha256
+		$factor = yaamp_algo_mBTRM_factor($submit->algo); 
 		$amount /= $factor;
 
 		$submit->amount = $amount - $amount*YAAMP_FEES_RENTING/100;
@@ -134,7 +134,7 @@ function BackendRentingPayout()
 	}
 
 	if($total_cleared>0)
-	 	debuglog("total cleared from rental $total_cleared BTC");
+	 	debuglog("total cleared from rental $total_cleared BTRM");
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -143,10 +143,10 @@ function BackendUpdateDeposit()
 {
 //	debuglog(__FUNCTION__);
 
-	$btc = getdbosql('db_coins', "symbol='BTC'");
-	if(!$btc) return;
+	$btc = getdbosql('db_coins', "symbol='BTRM'");
+	if(!$btrm) return;
 
-	$remote = new WalletRPC($btc);
+	$remote = new WalletRPC($btrm);
 
 	$info = $remote->getinfo();
 	if(!$info) return;

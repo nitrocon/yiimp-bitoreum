@@ -51,6 +51,6 @@ function BackendClearEarnings($coinid = NULL)
 	}
 
 	if($total_cleared>0)
-	 	debuglog("total cleared from mining $total_cleared BTC");
+	 	debuglog("total cleared from mining $total_cleared BTRM");
 }
 

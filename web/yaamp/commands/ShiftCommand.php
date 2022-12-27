@@ -109,10 +109,10 @@ class ShiftCommand extends CConsoleCommand
 	public function queryRate($args)
 	{
 		if (count($args) < 2)
-			die("usage: shift query <SYM-src> [SYM-dst=BTC]\n");
+			die("usage: shift query <SYM-src> [SYM-dst=BTRM]\n");
 
 		$srcsym = $args[1];
-		$dstsym = arraySafeVal($args, 2, 'BTC');
+		$dstsym = arraySafeVal($args, 2, 'BTRM');
 		if (!$this->checkSymbol($srcsym))
 			die("error: symbol '$srcsym' does not exist!\n");
 		if (!$this->shapeshiftAllowed($srcsym))

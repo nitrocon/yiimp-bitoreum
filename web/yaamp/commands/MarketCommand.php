@@ -217,7 +217,7 @@ class MarketCommand extends CConsoleCommand
 		$history = new db_market_history;
 		$c = new CDbCriteria;
 		$c->condition = "idcoin={$coin->id}";
-		if ($coin->symbol != 'BTC') $c->condition .= " AND mh_market.name='$market'"; // table alias set in model
+		if ($coin->symbol != 'BTRM') $c->condition .= " AND mh_market.name='$market'"; // table alias set in model
 		$c->order = 'time DESC';
 		$c->limit = 100;
 		$items = getdbolistWith('db_market_history', 'market', $c);
