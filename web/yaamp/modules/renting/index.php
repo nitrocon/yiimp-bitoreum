@@ -127,7 +127,7 @@ function graph_init_price(data)
 	var t = $.parseJSON(data);
 	var plot1 = $.jqplot('graph_results_price', t,
 	{
-		title: '<b>Renting Price (mBTC/Mh/day)</b>',
+		title: '<b>Renting Price (mBTRM/Mh/day)</b>',
 		axes: {
 			xaxis: {
 				tickInterval: 7200,

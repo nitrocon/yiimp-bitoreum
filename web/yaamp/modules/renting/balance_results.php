@@ -17,7 +17,7 @@ $unconfirmed = bitcoinvaluetoa($renter->unconfirmed);
 $spent = bitcoinvaluetoa($renter->spent);
 
 echo "<tr><td>Deposit Address</td><td colspan=2><span style='font-family: monospace; background-color: #eee;'>$renter->address</span></td></tr>";
-echo "<tr><td>Balance</td><td><a href='javascript:main_renter_tx()' target=yaamp_tx>$balance BTC</a></td>";
+echo "<tr><td>Balance</td><td><a href='javascript:main_renter_tx()' target=yaamp_tx>$balance BTRM</a></td>";
 
 if($renter->balance>=0.001)
 	echo "<td><input type='button' value='Withdraw' class='main-submit-button' onclick='javascript:yaamp_withdraw()'></td>";
@@ -28,14 +28,14 @@ echo "</tr>";
 
 if($unconfirmed > 0)
 {
-	echo "<tr><td>Unconfirmed</td><td>$unconfirmed BTC";
+	echo "<tr><td>Unconfirmed</td><td>$unconfirmed BTRM";
 	echo "<span style='font-size: .8em;'> (waiting for 1 confirmation)</span>";
 	echo "</td></tr>";
 }
 
 if(controller()->admin)
 {
-	echo "<tr><td>Spent</td><td>$spent BTC</td>
+	echo "<tr><td>Spent</td><td>$spent BTRM</td>
 		<td><input type='button' value='Reset' class='main-submit-button' onclick='javascript:reset_spent()'></td></tr>";
 
 	if($renter->id == 7)
@@ -47,9 +47,9 @@ if(controller()->admin)
 		$balance = bitcoinvaluetoa($renter->custom_balance);
 		$profit = bitcoinvaluetoa($profit);
 
-		echo "<tr><td>Received</td><td>$start BTC</td></tr>";
-		echo "<tr><td>Unpaid</td><td>$balance BTC</td></tr>";
-		echo "<tr><td>Profit</td><td>$profit BTC</td></tr>";
+		echo "<tr><td>Received</td><td>$start BTRM</td></tr>";
+		echo "<tr><td>Unpaid</td><td>$balance BTRM</td></tr>";
+		echo "<tr><td>Profit</td><td>$profit BTRM</td></tr>";
 	}
 }
 

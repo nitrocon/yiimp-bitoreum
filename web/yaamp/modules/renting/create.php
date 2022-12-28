@@ -15,11 +15,11 @@ if(!$b)
 	return;
 }
 
-// get a new btc address
-$btc = getdbosql('db_coins', "symbol='BTC'");
-if(!$btc) return;
+// get a new btrm address
+$btrm = getdbosql('db_coins', "symbol='BTRM'");
+if(!$btrm) return;
 
-$remote = new WalletRPC($btc);
+$remote = new WalletRPC($btrm);
 $renter = new db_renters;
 
 $renter->created = time();
