@@ -243,7 +243,7 @@ if (!empty($algo)) {
 		echo '<th>'.($hpw ? Itoa2(1000*round($hpw,3),2) : '').'</th>';
 
 		echo '<th title="Electricity price based on '.YIIMP_KWH_USD_PRICE.' USD per kWh">';
-		echo ($power>0 ? mbitcoinvaluetoa(powercost_mBTC($power)).' mBTC/day' : '').'</th>';
+		echo ($power>0 ? mbitcoinvaluetoa(powercost_mBTRM($power)).' mBTRM/day' : '').'</th>';
 
 		echo '<th colspan="2">&nbsp;</th>';
 		if ($this->admin) echo '<th>&nbsp;</th>'; // admin ops

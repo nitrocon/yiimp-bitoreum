@@ -77,9 +77,9 @@ echo <<<END
 <th data-sorter="numeric" width="100">Hashrate</th>
 <th data-sorter="numeric" width="80">Power</th>
 <th data-sorter="numeric" width="220">H/W</th>
-<th data-sorter="currency" width="100" title="mBTC/day">Cost*</th>
-<th data-sorter="currency" width="100" title="mBTC/day">Reward</th>
-<th data-sorter="currency" width="220" title="mBTC/day">Profit**</th>
+<th data-sorter="currency" width="100" title="mBTRM/day">Cost*</th>
+<th data-sorter="currency" width="100" title="mBTRM/day">Reward</th>
+<th data-sorter="currency" width="220" title="mBTRM/day">Profit**</th>
 <th data-sorter="numeric" width="100">Int</th>
 <th data-sorter="numeric" width="220">Freq</th>
 </tr>
@@ -89,7 +89,7 @@ END;
 if ($algo != 'all') {
 	$t1 = time() - 24*60*60;
 	$algo_24E = dboscalar("SELECT avg(price) FROM hashrate WHERE time>$t1 AND algo=:algo", array(':algo'=>$algo));
-	$algo_24E = $algo_24E / (1000 * yaamp_algo_mBTC_factor($algo)); // mBTC per kHs
+	$algo_24E = $algo_24E / (1000 * yaamp_algo_mBTRM_factor($algo)); // mBTRM per kHs
 } else {
 	$this->goback();
 }
@@ -113,7 +113,7 @@ foreach ($in_db as $row) {
 	if ($row['chip'] == '750' || $row['chip'] == '750 Ti' || $row['chip'] == 'Quadro K620') $factor = 2.0;
 	$power *= $factor;
 
-	$cost = powercost_mBTC($power);
+	$cost = powercost_mBTRM($power);
 	$ppw = $power>0 ? (double) $row['khps']/$power : 0.;
 	$ppw_label = ($power>0 ? Itoa2(1000*round($ppw,3),3).'H' : '-');
 

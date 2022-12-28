@@ -33,7 +33,7 @@ class db_markets extends CActiveRecord
 	public function save($runValidation=true,$attributes=null)
 	{
 		if (empty($this->base_coin)) $this->base_coin = null;
-		else if ($this->base_coin == 'BTC') $this->base_coin = null;
+		else if ($this->base_coin == 'BTRM') $this->base_coin = null;
 		else if (strpos($this->name, $this->base_coin) === false) {
 			$parts = explode(' ', $this->name);
 			$this->name = trim($parts[0].' '.$this->base_coin);

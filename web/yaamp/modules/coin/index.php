@@ -49,7 +49,7 @@ $total_installed = 0;
 $coins = getdbolist('db_coins', "1 ORDER BY created DESC");
 foreach($coins as $coin)
 {
-//	if($coin->symbol == 'BTC') continue;
+//	if($coin->symbol == 'BTRM') continue;
 	if($coin->enable) $total_active++;
 	if($coin->installed) $total_installed++;
 

@@ -10,7 +10,7 @@ class ExplorerController extends CommonController
 
 	public function run($actionID)
 	{
-		// Forward the url /explorer/BTC to the BTC block explorer
+		// Forward the url /explorer/BTRM to the BTRM block explorer
 		if (!empty($actionID)) {
 			if (is_numeric($actionID) && isset($_REQUEST['id'])) {
 				$this->forward('id');
@@ -52,7 +52,7 @@ class ExplorerController extends CommonController
 
 	public function actionIndex()
 	{
-		if(isset($_COOKIE['mainbtc'])) return;
+		if(isset($_COOKIE['mainbtrm'])) return;
 		if(!LimitRequest('explorer')) return;
 
 		$id = getiparam('id');

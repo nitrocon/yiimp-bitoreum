@@ -139,7 +139,7 @@ function yaamp_get_algos()
 
 // Used for graphs and 24h profit
 // GH/s for fast algos like sha256
-function yaamp_algo_mBTC_factor($algo)
+function yaamp_algo_mBTRM_factor($algo)
 {
 	switch($algo) {
 	case 'sha256':
@@ -169,7 +169,7 @@ function yaamp_algo_mBTC_factor($algo)
 	}
 }
 
-// mBTC coef per algo
+// mBTRM coef per algo
 function yaamp_get_algo_norm($algo)
 {
 	global $configAlgoNormCoef;
@@ -565,7 +565,7 @@ function yaamp_profitability($coin)
 {
 	if(!$coin->difficulty) return 0;
 
-	$btcmhd = 20116.56761169 / $coin->difficulty * $coin->reward * $coin->price;
+	$btrmmhd = 20116.56761169 / $coin->difficulty * $coin->reward * $coin->price;
 	if(!$coin->auxpow && $coin->rpcencoding == 'POW')
 	{
 		$listaux = getdbolist('db_coins', "enable and visible and auto_ready and auxpow and algo='$coin->algo'");
@@ -573,13 +573,13 @@ function yaamp_profitability($coin)
 		{
 			if(!$aux->difficulty) continue;
 
-			$btcmhdaux = 20116.56761169 / $aux->difficulty * $aux->reward * $aux->price;
-			$btcmhd += $btcmhdaux;
+			$btrmmhdaux = 20116.56761169 / $aux->difficulty * $aux->reward * $aux->price;
+			$btrmmhd += $btrmmhdaux;
 		}
 	}
 
-	$algo_unit_factor = yaamp_algo_mBTC_factor($coin->algo);
-	return $btcmhd * $algo_unit_factor;
+	$algo_unit_factor = yaamp_algo_mBTRM_factor($coin->algo);
+	return $btrmmhd * $algo_unit_factor;
 }
 
 function yaamp_convert_amount_user($coin, $amount, $user)
@@ -587,7 +587,7 @@ function yaamp_convert_amount_user($coin, $amount, $user)
 	$refcoin = getdbo('db_coins', $user->coinid);
 	$value = 0.;
 	if (YAAMP_ALLOW_EXCHANGE) {
-		if(!$refcoin) $refcoin = getdbosql('db_coins', "symbol='BTC'");
+		if(!$refcoin) $refcoin = getdbosql('db_coins', "symbol='BTRM'");
 		if(!$refcoin || $refcoin->price <= 0) return 0;
 		$value = $amount * $coin->price / $refcoin->price;
 	} else if ($coin->price && $refcoin && $refcoin->price > 0.) {
@@ -603,7 +603,7 @@ function yaamp_convert_earnings_user($user, $status)
 	$refcoin = getdbo('db_coins', $user->coinid);
 	$value = 0.;
 	if (YAAMP_ALLOW_EXCHANGE) {
-		if(!$refcoin) $refcoin = getdbosql('db_coins', "symbol='BTC'");
+		if(!$refcoin) $refcoin = getdbosql('db_coins', "symbol='BTRM'");
 		if(!$refcoin || $refcoin->price <= 0) return 0;
 		$value = dboscalar("SELECT sum(amount*price) FROM earnings WHERE $status AND userid={$user->id}");
 		$value = $value / $refcoin->price;

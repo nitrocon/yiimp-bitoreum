@@ -18,7 +18,7 @@ echo CUFHtml::closeCtrlHolder();
 echo CUFHtml::openActiveCtrlHolder($market, 'base_coin');
 echo CUFHtml::activeLabelEx($market, 'base_coin');
 echo CUFHtml::activeTextField($market, 'base_coin', array('maxlength'=>16,'style'=>'width: 40px;'));
-echo '<p class="formHint2">Default (empty) is BTC</p>';
+echo '<p class="formHint2">Default (empty) is BTRM</p>';
 echo CUFHtml::closeCtrlHolder();
 
 echo CUFHtml::closeTag('fieldset');

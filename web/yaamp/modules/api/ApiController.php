@@ -83,8 +83,8 @@ class ApiController extends CommonController
                 ':algo' => $algo
             ));
 
-            $algo_unit_factor = yaamp_algo_mBTC_factor($algo);
-            $btcmhday1        = $hashrate1 > 0 ? mbitcoinvaluetoa($total1 / $hashrate1 * 1000000 * 1000 * $algo_unit_factor) : 0;
+            $algo_unit_factor = yaamp_algo_mBTRM_factor($algo);
+            $btrmmhday1        = $hashrate1 > 0 ? mbitcoinvaluetoa($total1 / $hashrate1 * 1000000 * 1000 * $algo_unit_factor) : 0;
 
             $fees = yaamp_fee($algo);
             $fees_solo = yaamp_fee_solo($algo);
@@ -104,8 +104,8 @@ class ApiController extends CommonController
                 "workers_solo" => (int) $workers_solo,
                 "estimate_current" => $price,
                 "estimate_last24h" => $avgprice,
-                "actual_last24h" => $btcmhday1,
-                "mbtc_mh_factor" => $algo_unit_factor,
+                "actual_last24h" => $btrmmhday1,
+                "mbtrm_mh_factor" => $algo_unit_factor,
                 "hashrate_last24h" => (double) $hashrate1
             );
             if (YAAMP_RENTAL) {
@@ -189,8 +189,8 @@ class ApiController extends CommonController
 				if (yaamp_coin_solo_rate($coin->id)) $pool_solo_hash = yaamp_coin_solo_rate($coin->id);
 				else $pool_solo_hash = '0';
 	
-				$btcmhd = yaamp_profitability($coin);
-				$btcmhd = mbitcoinvaluetoa($btcmhd);
+				$btrmmhd = yaamp_profitability($coin);
+				$btrmmhd = mbitcoinvaluetoa($btrmmhd);
 				
 				//Add network hash difficulty and symbol
 				$min_ttf      = $coin->network_ttf > 0 ? min($coin->actual_ttf, $coin->network_ttf) : $coin->actual_ttf;
@@ -228,11 +228,11 @@ class ApiController extends CommonController
 					'hashrate_shared' => $pool_shared_hash,
 					'hashrate_solo' => $pool_solo_hash,
 					'network_hashrate' => $network_hash,
-					'estimate' => $btcmhd,
+					'estimate' => $btrmmhd,
 					'24h_blocks' => (int) arraySafeVal($res24h, 'a'),
 					'24h_blocks_shared' => (int) arraySafeVal($res24h_shared, 'a'),
 					'24h_blocks_solo' => (int) arraySafeVal($res24h_solo, 'a'),
-					'24h_btc' => round(arraySafeVal($res24h, 'b', 0), 8),
+					'24h_btrm' => round(arraySafeVal($res24h, 'b', 0), 8),
 					'lastblock' => $lastblock,
 					'lastblock_shared' => $lastblock_shared,
 					'lastblock_solo' => $lastblock_solo,

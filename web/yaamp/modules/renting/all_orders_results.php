@@ -80,7 +80,7 @@ echo "</tbody></table>";
 
 echo "<p style='font-size: .8em'>
 	&nbsp;* approximate from the last 5 minutes submitted shares<br>
-	&nbsp;** price in mBTC/MH/day (GH/day for sha and blake algos)<br>
+	&nbsp;** price in mBTRM/MH/day (GH/day for sha and blake algos)<br>
 	</p>";
 
 echo "<br>";

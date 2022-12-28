@@ -143,7 +143,7 @@ function BackendUpdateDeposit()
 {
 //	debuglog(__FUNCTION__);
 
-	$btc = getdbosql('db_coins', "symbol='BTRM'");
+	$btrm = getdbosql('db_coins', "symbol='BTRM'");
 	if(!$btrm) return;
 
 	$remote = new WalletRPC($btrm);

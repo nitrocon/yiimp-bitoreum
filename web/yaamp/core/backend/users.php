@@ -33,7 +33,7 @@ function BackendUsersUpdate()
 						$coinref = getdbo('db_coins', $user->coinid);
 						if(!$coinref) {
 							if (YAAMP_ALLOW_EXCHANGE)
-								$coinref = getdbosql('db_coins', "symbol='BTC'");
+								$coinref = getdbosql('db_coins', "symbol='BTRM'");
 							else
 								continue;
 						}

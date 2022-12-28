@@ -50,7 +50,7 @@ end;
 $list = getdbolist('db_coins', "enable and visible order by name");
 foreach($list as $coin)
 {
-	if($coin->symbol == 'BTC') continue;
+	if($coin->symbol == 'BTRM') continue;
 	if(!empty($coin->symbol2)) continue;
 
 	$coin->version = formatWalletVersion($coin);

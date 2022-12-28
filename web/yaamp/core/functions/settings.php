@@ -7,7 +7,7 @@ function settings_key_type($key)
 	if (strpos($key, 'enabled') !== false) return 'bool';
 	if (strpos($key, 'disabled') !== false) return 'bool';
 	if (substr($key, -3) == 'pct') return 'percent';
-	if (substr($key, -3) == 'btc') return 'price';
+	if (substr($key, -3) == 'btrm') return 'price';
 	if (substr($key, -5) == 'price') return 'price';
 	return 'string';
 }
@@ -139,13 +139,13 @@ function exchange_valid_keys()
 	return array(
 		'disabled' => 'Fully disable the exchange',
 
-		'trade_min_btc'			=> 'Minimum order on the exchange',
+		'trade_min_btrm'			=> 'Minimum order on the exchange',
 		'trade_sell_ask_pct'	=> 'Initial order ask price related to the lowest ask (in %)',
 		'trade_cancel_ask_pct'	=> 'Cancel orders if the lowest ask reach this % of your order',
 
-	//	'withdraw_btc_address'	=> 'Custom withdraw BTC address for the exchange',
-		'withdraw_min_btc'		=> 'Auto withdraw when your BTC balance reach this amount (0=disabled)',
-		'withdraw_fee_btc'		=> 'Fees in BTC required to withdraw BTCs on the exchange',
+	//	'withdraw_btrm_address'	=> 'Custom withdraw BTRM address for the exchange',
+		'withdraw_min_btrm'		=> 'Auto withdraw when your BTRM balance reach this amount (0=disabled)',
+		'withdraw_fee_btrm'		=> 'Fees in BTRM required to withdraw BTRMs on the exchange',
 	);
 }
 
@@ -175,7 +175,7 @@ function market_settings_prefetch_all()
 	}
 }
 
-function market_get($exchange, $symbol, $key, $default=null, $base='BTC')
+function market_get($exchange, $symbol, $key, $default=null, $base='BTRM')
 {
 	// cache to prevent repeated sql queries in loops
 	global $cacheset_market;
@@ -186,14 +186,14 @@ function market_get($exchange, $symbol, $key, $default=null, $base='BTC')
 	return $value;
 }
 
-function market_set($exchange, $symbol, $key, $value, $base='BTC')
+function market_set($exchange, $symbol, $key, $value, $base='BTRM')
 {
 	global $cacheset_market;
 	$cacheset_market = array();
 	return settings_set("$exchange-$symbol-$base-$key", $value);
 }
 
-function market_set_default($exchange, $symbol, $key, $value, $base='BTC')
+function market_set_default($exchange, $symbol, $key, $value, $base='BTRM')
 {
 	$res = settings_set_default("$exchange-$symbol-$base-$key", $value);
 	if ($res) {
@@ -203,7 +203,7 @@ function market_set_default($exchange, $symbol, $key, $value, $base='BTC')
 	return $res;
 }
 
-function market_unset($exchange, $symbol, $key, $base='BTC')
+function market_unset($exchange, $symbol, $key, $base='BTRM')
 {
 	global $cacheset_market;
 	$cacheset_market = array();

@@ -109,7 +109,7 @@ class db_coins extends CActiveRecord
 	public function createExplorerLink($label, $params=array(), $htmlOptions=array(), $force=false)
 	{
 		if($this->id == 6 && isset($params['txid'])) {
-			// BTC txid
+			// BTRM txid
 			$url = 'https://blockchain.info/tx/'.$params['txid'];
 			$htmlOpts = array_merge(array('target'=>'_blank'), $htmlOptions);
 			return CHtml::link($label, $url, $htmlOpts);
